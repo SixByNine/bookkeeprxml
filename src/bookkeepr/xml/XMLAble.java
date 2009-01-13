@@ -31,8 +31,28 @@ import java.util.List;
  */
 public interface XMLAble {
 
+    /**
+     * 
+     * Returns the field names of xmlable elements that can be contained in this element
+     * 
+     * @return
+     */
     public List<String> getXmlSubObjects();
+    
+    /**
+     * 
+     * Returns the name of the class that this represtents within the bookkeepr.xmlable package
+     * 
+     * @return
+     */
     public String getClassName();
+    
+    /**
+     * Returns a hash map of the fields of this object that are to be converted
+     * to XML in the xml read/write process.
+     * 
+     * @return
+     */
     public HashMap<String,StringConvertable> getXmlParameters();
     
 }
