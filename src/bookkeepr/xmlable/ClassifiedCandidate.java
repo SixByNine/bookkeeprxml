@@ -39,6 +39,31 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
 
     public ClassifiedCandidate() {
     }
+    
+    public StringBuffer getPsrcatEntry(){
+        StringBuffer buf = new StringBuffer();
+        RawCandidateMatched pref=getPreferedCandidate();
+        buf.append("PSRJ     ");
+        buf.append(name);
+        buf.append("\n");
+        buf.append("RAJ      ");
+        buf.append(coordinate.getRA().toString(false));
+        buf.append("\n");
+        buf.append("DECJ     ");
+        buf.append(coordinate.getDec().toString(false));
+        buf.append("\n");
+        buf.append("P0       ");
+        buf.append(pref.getBaryPeriod());
+        buf.append("\n");
+        buf.append("DM       ");
+        buf.append(pref.getDm());
+        buf.append("\n");
+        buf.append("PEPOCH   ");
+        buf.append(pref.getMjd());
+        buf.append("\n");
+        return buf;
+        
+    }
 
     public CandClass getCandClass() {
         return candClass;
