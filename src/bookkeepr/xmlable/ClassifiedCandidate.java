@@ -34,6 +34,8 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
     private ArrayList<RawCandidateMatched> possibleMatches = new ArrayList<RawCandidateMatched>();
     private Coordinate coordinate = null;
     private RawCandidateMatched preferedCandidate = null;
+    private String obsStatus = "None";
+    private String confStatus = "Unobserved";
 
     public ClassifiedCandidate() {
     }
@@ -43,22 +45,28 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
     }
 
     public List<Long> getMatched(HarmonicType htype, boolean b) {
-       ArrayList<RawCandidateMatched> list = possibleMatches;
-       if(b){
-           list = confirmedMatches;
-       }
-       
-       
-       ArrayList<Long> out = new ArrayList<Long>();
-       
-       for(RawCandidateMatched m : list){
-           if(m.getHarmonicType()==htype)out.add(m.getId());
-       }
-       return out;
+        ArrayList<RawCandidateMatched> list = possibleMatches;
+        if (b) {
+            list = confirmedMatches;
+        }
+
+
+        ArrayList<Long> out = new ArrayList<Long>();
+
+        for (RawCandidateMatched m : list) {
+            if (m.getHarmonicType() == htype) {
+                out.add(m.getId());
+            }
+        }
+        return out;
     }
 
     public void setCandClass(CandClass candClass) {
         this.candClass = candClass;
+        if (candClass.equals(CandClass.KnownPsr)) {
+            this.confStatus = "KnownPsr";
+            obsStatus = "None";
+        }
     }
 
     public int getCandClassInt() {
@@ -66,7 +74,7 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
     }
 
     public void setCandClassInt(int candClass) {
-        this.candClass = CandClass.fromIntClass(candClass);
+        setCandClass(CandClass.fromIntClass(candClass));
     }
 
     public Coordinate getCoordinate() {
@@ -102,9 +110,12 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
     }
 
     public RawCandidateMatched getPreferedCandidate() {
-        if(preferedCandidate==null){
-            if(this.confirmedMatches.size() > 0)setPreferedCandidate(this.confirmedMatches.get(0));
-            else if(this.possibleMatches.size() > 0)setPreferedCandidate(this.possibleMatches.get(0));
+        if (preferedCandidate == null) {
+            if (this.confirmedMatches.size() > 0) {
+                setPreferedCandidate(this.confirmedMatches.get(0));
+            } else if (this.possibleMatches.size() > 0) {
+                setPreferedCandidate(this.possibleMatches.get(0));
+            }
         }
         return preferedCandidate;
     }
@@ -128,8 +139,6 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
         }
         return null;
     }
-    
-    
 
     public void addRawCandidateMatched(RawCandidateMatched cand) {
 
@@ -242,7 +251,25 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
         xmlParameters.put("Name", StringConvertable.STRING);
         xmlParameters.put("CandClassInt", StringConvertable.INT);
         xmlParameters.put("Coordinate", StringConvertable.COORDINATE);
+        xmlParameters.put("ObsStatus", StringConvertable.STRING);
+        xmlParameters.put("ConfStatus", StringConvertable.STRING);
 
         xmlSubObjects.add("RawCandidateMatched");
+    }
+
+    public String getObsStatus() {
+        return obsStatus;
+    }
+
+    public void setObsStatus(String obsStatus) {
+        this.obsStatus = obsStatus;
+    }
+
+    public String getConfStatus() {
+        return confStatus;
+    }
+
+    public void setConfStatus(String confStatus) {
+        this.confStatus = confStatus;
     }
 }
