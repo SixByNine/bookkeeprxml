@@ -62,7 +62,6 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
         buf.append(pref.getMjd());
         buf.append("\n");
         return buf;
-        
     }
 
     public CandClass getCandClass() {
