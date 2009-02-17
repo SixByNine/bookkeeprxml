@@ -100,7 +100,11 @@ public abstract class StringConvertable<E> {
     public static final StringConvertable<Float> FLOAT = new StringConvertable<Float>() {
 
         public Float fromString(String item) {
-            return Float.parseFloat(item);
+            try {
+                return Float.parseFloat(item);
+            } catch (NumberFormatException ex) {
+                return Float.NaN;
+            }
         }
 
         public Class getTargetClass() {
