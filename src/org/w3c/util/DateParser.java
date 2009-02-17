@@ -142,7 +142,8 @@ public class DateParser {
 		if (check(st, ":") && (st.hasMoreTokens())) {
 		    tzmin = Integer.parseInt(st.nextToken());
 		} else {
-		    throw new InvalidDateException("Missing minute field");
+		   // throw new InvalidDateException("Missing minute field");
+                    tzmin=0;
 		}
 		if (plus) {
 		    calendar.add(Calendar.HOUR, -tzhour);
