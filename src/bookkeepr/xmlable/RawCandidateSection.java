@@ -258,42 +258,44 @@ public class RawCandidateSection implements XMLAbleComplex {
                     public List<String> createXMLLines() {
                         ArrayList<String> out = new ArrayList<String>();
                         SNRBlock block = sec.getSnrBlock();
-                        out.add("\t<snr_block>");
-                        out.add("\t<period_index>" + StringConvertable.DOUBLEARRAY.toString(block.getPeriodIndex()) + "</period_index>");
-                        out.add("\t<dm_index>" + StringConvertable.DOUBLEARRAY.toString(block.getDmIndex()) + "</dm_index>");
-                        out.add("\t<accn_index>" + StringConvertable.DOUBLEARRAY.toString(block.getAccnIndex()) + "</accn_index>");
-                        out.add("\t<jerk_index>" + StringConvertable.DOUBLEARRAY.toString(block.getJerkIndex()) + "</jerk_index>");
+			if(block!=null){
+				out.add("\t<snr_block>");
+				out.add("\t<period_index>" + StringConvertable.DOUBLEARRAY.toString(block.getPeriodIndex()) + "</period_index>");
+				out.add("\t<dm_index>" + StringConvertable.DOUBLEARRAY.toString(block.getDmIndex()) + "</dm_index>");
+				out.add("\t<accn_index>" + StringConvertable.DOUBLEARRAY.toString(block.getAccnIndex()) + "</accn_index>");
+				out.add("\t<jerk_index>" + StringConvertable.DOUBLEARRAY.toString(block.getJerkIndex()) + "</jerk_index>");
 
 
-                        double[][][][] data = block.getBlock();
-                        double max = block.getMax();
-                        double min = block.getMin();
-                       
-                        out.add("\t<block_data format='02X' min='" + min + "' max='" + max + "'>");
-                        int count = 80;
-                        StringBuffer buf = new StringBuffer();
-//                        Formatter formatter = new Formatter(buf);
-                        buf.append("\n");
-                        for (int x = 0; x < block.getDmIndex().length; x++) {
-                            for (int y = 0; y < block.getPeriodIndex().length; y++) {
-                                for (int z = 0; z < block.getAccnIndex().length; z++) {
-                                    for (int q = 0; q < block.getJerkIndex().length; q++) {
-                                        int intV = (int) (255.0 *( data[x][y][z][q] - min) / (max - min));
-//                                        formatter.format("%02X", intV);
-                                        buf.append(HexLookup.twochar[intV]);
-                                        count-=2;
-                                        if (count <= 0) {
-                                            count = 80;
-                                            buf.append("\n");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        buf.append("\n");
-                        out.add(buf.toString());
-                        out.add("\t</block_data>");
-                        out.add("</snr_block>");
+				double[][][][] data = block.getBlock();
+				double max = block.getMax();
+				double min = block.getMin();
+
+				out.add("\t<block_data format='02X' min='" + min + "' max='" + max + "'>");
+				int count = 80;
+				StringBuffer buf = new StringBuffer();
+				//                        Formatter formatter = new Formatter(buf);
+				buf.append("\n");
+				for (int x = 0; x < block.getDmIndex().length; x++) {
+					for (int y = 0; y < block.getPeriodIndex().length; y++) {
+						for (int z = 0; z < block.getAccnIndex().length; z++) {
+							for (int q = 0; q < block.getJerkIndex().length; q++) {
+								int intV = (int) (255.0 *( data[x][y][z][q] - min) / (max - min));
+								//                                        formatter.format("%02X", intV);
+								buf.append(HexLookup.twochar[intV]);
+								count-=2;
+								if (count <= 0) {
+									count = 80;
+									buf.append("\n");
+								}
+							}
+						}
+					}
+				}
+				buf.append("\n");
+				out.add(buf.toString());
+				out.add("\t</block_data>");
+				out.add("</snr_block>");
+			}
                         return out;
 
                     }
