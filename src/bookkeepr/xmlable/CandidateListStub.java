@@ -45,7 +45,8 @@ public class CandidateListStub implements IdAble, XMLAble {
     private long processingId;
     private int ncands;
     private Date completedDate = null;
-    private Coordinate coordinate=null;
+    private Date observedDate = null;
+    private Coordinate coordinate = null;
 
     public long getId() {
         return id;
@@ -66,6 +67,17 @@ public class CandidateListStub implements IdAble, XMLAble {
         return DateParser.getIsoDateNoMillis(completedDate);
     }
 
+    public Date getObservedDateObj() {
+        return observedDate;
+    }
+
+    public String getObservedDate() {
+        if (observedDate == null) {
+            return null;
+        }
+        return DateParser.getIsoDateNoMillis(completedDate);
+    }
+
     public Date getCompletedDateAlt() {
         return completedDate;
     }
@@ -80,6 +92,15 @@ public class CandidateListStub implements IdAble, XMLAble {
         } catch (InvalidDateException ex) {
             Logger.getLogger(Psrxml.class.getName()).log(Level.WARNING, "Bad date/time specified in psrxml file. MUST be in ISO8601 format.", ex);
             this.completedDate = null;
+        }
+    }
+
+    public void setObservedDate(String completedDate) {
+        try {
+            this.observedDate = DateParser.parse(completedDate);
+        } catch (InvalidDateException ex) {
+            Logger.getLogger(Psrxml.class.getName()).log(Level.WARNING, "Bad date/time specified in psrxml file. MUST be in ISO8601 format.", ex);
+            this.observedDate = null;
         }
     }
 
@@ -127,8 +148,6 @@ public class CandidateListStub implements IdAble, XMLAble {
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
-    
-    
 
     public String getClassName() {
         return this.getClass().getSimpleName();
@@ -150,6 +169,7 @@ public class CandidateListStub implements IdAble, XMLAble {
         xmlParameters.put("PsrxmlId", StringConvertable.ID);
         xmlParameters.put("ProcessingId", StringConvertable.ID);
         xmlParameters.put("CompletedDate", StringConvertable.STRING);
+        xmlParameters.put("ObservedDate", StringConvertable.STRING);
         xmlParameters.put("Name", StringConvertable.STRING);
         xmlParameters.put("Ncands", StringConvertable.INT);
         xmlParameters.put("Coordinate", StringConvertable.COORDINATE);
