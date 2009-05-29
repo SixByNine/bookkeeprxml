@@ -75,7 +75,7 @@ public class CandidateListStub implements IdAble, XMLAble {
         if (observedDate == null) {
             return null;
         }
-        return DateParser.getIsoDateNoMillis(completedDate);
+        return DateParser.getIsoDateNoMillis(observedDate);
     }
 
     public Date getCompletedDateAlt() {
