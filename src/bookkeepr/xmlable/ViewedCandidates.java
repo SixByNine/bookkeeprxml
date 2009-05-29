@@ -21,10 +21,14 @@ public class ViewedCandidates implements XMLAble, IdAble {
     private long id;
     private String name;
     private ArrayList<Long> viewed = new ArrayList<Long>();
+    private ArrayList<Long> viewedClist = new ArrayList<Long>();
 
     public void append(ViewedCandidates extended) {
         for (Long l : extended.getViewed()) {
             this.addViewed(l);
+        }
+        for (Long l : extended.getViewedClists()) {
+            this.addViewedClist(l);
         }
     }
 
@@ -33,6 +37,14 @@ public class ViewedCandidates implements XMLAble, IdAble {
         // only add unique items.
         if (index < 0) {
             this.viewed.add(-index - 1, id);
+        }
+    }
+
+    public void addViewedClist(Long id) {
+        int index = Collections.binarySearch(getViewedClists(), id);
+        // only add unique items.
+        if (index < 0) {
+            this.getViewedClists().add(-index - 1, id);
         }
     }
 
@@ -60,6 +72,14 @@ public class ViewedCandidates implements XMLAble, IdAble {
         this.viewed = viewed;
     }
 
+    public ArrayList<Long> getViewedClists() {
+        return viewedClist;
+    }
+
+    public void setViewedClists(ArrayList<Long> viewedClist) {
+        this.viewedClist = viewedClist;
+    }
+
     public String getClassName() {
         return this.getClass().getSimpleName();
     }
@@ -79,6 +99,8 @@ public class ViewedCandidates implements XMLAble, IdAble {
         xmlParameters.put("Id", StringConvertable.ID);
         xmlParameters.put("Name", StringConvertable.STRING);
         xmlParameters.put("Viewed", StringConvertable.IDLIST);
+
+        xmlParameters.put("ViewedClists", StringConvertable.IDLIST);
 
     }
 }
