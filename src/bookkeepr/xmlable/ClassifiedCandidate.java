@@ -36,6 +36,7 @@ public class ClassifiedCandidate implements XMLAble, IdAble, SkyLocated {
     private RawCandidateMatched preferedCandidate = null;
     private String obsStatus = "None";
     private String confStatus = "Unobserved";
+    
 
     public ClassifiedCandidate() {
     }

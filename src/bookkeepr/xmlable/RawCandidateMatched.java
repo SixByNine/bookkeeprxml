@@ -20,13 +20,12 @@ public class RawCandidateMatched extends RawCandidateBasic {
     private HarmonicType harmType;
     private boolean confirmed = false;
     private boolean prefered = false;
+    private String user = "-";
 
     public RawCandidateMatched() {
         harmType = HarmonicType.None;
     }
 
-    
-    
     public RawCandidateMatched(HarmonicType harmType, RawCandidateBasic basic) {
         this.harmType = harmType;
         this.setAccel(basic.getAccel());
@@ -134,5 +133,15 @@ public class RawCandidateMatched extends RawCandidateBasic {
         xmlParameters.put("HarmType", StringConvertable.STRING);
         xmlParameters.put("Confirmed", StringConvertable.BOOLEAN);
         xmlParameters.put("Prefered", StringConvertable.BOOLEAN);
+        xmlParameters.put("User", StringConvertable.STRING);
+
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }
