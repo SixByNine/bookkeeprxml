@@ -1230,7 +1230,7 @@ public class Colourmap implements Serializable{
                 /*13:class3*/ new Color(0xc0c0c0),   // dark green-ish
                 /*14:dud*/     new Color(0xc0c0c0),   // coral
                 /*15:???*/     new Color(0xc0c0c0),   // cadetblue4
-                /*16:???*/     new Color(0xff7f50),   // coral
+                /*16:Last*/     new Color(0x40E0D0),   // coral
                 /*17:???*/     new Color(0x45ab1f),   // dark green-ish
                 /*18:???*/     new Color(0x90422d),   // sienna-ish
                 /*19:???*/     new Color(0xa0a0a0),   // grey-ish
