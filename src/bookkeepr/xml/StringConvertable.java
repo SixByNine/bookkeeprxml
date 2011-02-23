@@ -462,10 +462,13 @@ public abstract class StringConvertable<E> {
     public static final StringConvertable<ArrayList<Long>> IDLIST = new StringConvertable<ArrayList<Long>>() {
 
         public ArrayList<Long> fromString(String item) {
-            String[] elems = regex.split(item);
             ArrayList<Long> res = new ArrayList<Long>();
-            for (String elem : elems) {
-                res.add(Long.parseLong(elem, 16));
+            if (!item.trim().equals("")) {
+                String[] elems = regex.split(item);
+                for (String elem : elems) {
+                    res.add(Long.parseLong(elem, 16));
+                    
+                }
             }
             return res;
         }

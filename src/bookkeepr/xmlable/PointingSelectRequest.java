@@ -36,6 +36,8 @@ public class PointingSelectRequest implements XMLAble {
     long exactId = 0;
     String gridId = null;
     Coordinate target = null;
+    float startRa = Float.NaN;
+    float endRa = Float.NaN;
     long configurationId = 0;
     float visibleAt = Float.NaN;
     float setAt = Float.NaN;
@@ -160,6 +162,22 @@ public class PointingSelectRequest implements XMLAble {
         this.ignoreIdList = ignoreIdList;
     }
 
+    public float getEndRa() {
+        return endRa;
+    }
+
+    public float getStartRa() {
+        return startRa;
+    }
+
+    public void setEndRa(float endRa) {
+        this.endRa = endRa;
+    }
+
+    public void setStartRa(float startRa) {
+        this.startRa = startRa;
+    }
+
     
     
     
@@ -193,5 +211,7 @@ public class PointingSelectRequest implements XMLAble {
         xmlParameters.put("MaxTobs", StringConvertable.FLOAT);
         xmlParameters.put("MinTobs", StringConvertable.FLOAT);
         xmlParameters.put("IgnoreIdList", StringConvertable.IDARRAY);
+        xmlParameters.put("StartRa", StringConvertable.FLOAT);
+        xmlParameters.put("EndRa", StringConvertable.FLOAT);
     }
 }

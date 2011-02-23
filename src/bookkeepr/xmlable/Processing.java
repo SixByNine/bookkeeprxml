@@ -17,6 +17,7 @@ import java.util.List;
 public class Processing implements IdAble {
 
     private long id;
+    private String name="NA";
 
     public long getId() {
         return id;
@@ -26,9 +27,20 @@ public class Processing implements IdAble {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
     @Override
     public String toString() {
-        return Long.toHexString(id);
+        //return Long.toHexString(id);
+        return name;
     }
 
     public String getClassName() {
@@ -48,6 +60,7 @@ public class Processing implements IdAble {
 
     static {
         xmlParameters.put("Id", StringConvertable.ID);
+        xmlParameters.put("Name", StringConvertable.STRING);
 
     }
 }

@@ -145,6 +145,7 @@ public class BookKeeprHandler extends DefaultHandler {
                         String msg = "Badly formatted data " + characters + " for type " + conv.getTargetClass()+ " in class "+ obj.getClassName();
                         Logger.getLogger(BookKeeprHandler.class.getName()).log(Level.WARNING, msg);
                         this.error.append(msg);
+                        e.printStackTrace();
                         throw new SAXException(msg, e);
                     }
                     method.invoke(obj, o);
